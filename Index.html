@@ -645,7 +645,7 @@
   <div class="aurora c"></div>
 
   <header>
-    <span class="kicker">SOMOS · Poli Matute</span>
+    <span class="kicker">SOMOS · PREPA 10</span>
     <h1 id="titulo">BUZÓN DE QUEJAS</h1>
     <h2> Comité de oposición, no representación oficial.</h2>
     <p class="lema">Llamado a la conciencia. Aquí tu voz no se pierde: se registra, se acompaña y se lleva a donde tiene que llegar.</p>
@@ -681,4 +681,363 @@
           <div class="campo">
             <label>Tipo de queja <span class="req">*</span></label>
             <div class="opciones" role="radiogroup" aria-label="Tipo de queja">
-              <input type="radio" id="t1" name="Tipo de queja" value="Instalaciones" required><label for="t
+              <input type="radio" id="t1" name="Tipo de queja" value="Instalaciones" required><label for="t1">Instalaciones</label>
+              <input type="radio" id="t2" name="Tipo de queja" value="Docentes / clases"><label for="t2">Docentes / clases</label>
+              <input type="radio" id="t3" name="Tipo de queja" value="Administración"><label for="t3">Administración</label>
+              <input type="radio" id="t4" name="Tipo de queja" value="Convivencia / acoso"><label for="t4">Convivencia / acoso</label>
+              <input type="radio" id="t5" name="Tipo de queja" value="Seguridad"><label for="t5">Seguridad</label>
+              <input type="radio" id="t6" name="Tipo de queja" value="Otro"><label for="t6">Otro</label>
+            </div>
+            <span class="mensaje-error">Elige un tipo de queja.</span>
+          </div>
+
+          <div class="rejilla">
+            <div class="campo">
+              <label for="nombre">Nombre (opcional)</label>
+              <input type="text" id="nombre" name="Nombre" placeholder="Puedes dejarlo vacío y enviar anónimo" autocomplete="name">
+            </div>
+            <div class="campo">
+              <label for="correo">Correo de contacto (opcional)</label>
+              <input type="email" id="correo" name="Correo" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+              <span class="mensaje-error">Escribe un correo válido o déjalo vacío.</span>
+            </div>
+            <div class="campo">
+              <label for="grupo">Semestre, edificio y aula</label>
+              <input type="text" id="grupo" name="Grupo o semestre" placeholder="">
+            </div>
+            <div class="campo">
+              <label for="turno">Turno</label>
+              <select id="turno" name="Turno">
+                <option value="No especificado">No especificado</option>
+                <option value="Matutino">Matutino</option>
+                <option value="Vespertino">Vespertino</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="lugar">Lugar de los hechos <span class="req">*</span></label>
+              <input type="text" id="lugar" name="Lugar" placeholder="Ej. Baños edificio C, laboratorio, cancha..." required>
+              <span class="mensaje-error">Dinos dónde ocurrió.</span>
+            </div>
+            <div class="campo">
+              <label for="fecha">¿Cuándo ocurrió? <span class="req">*</span></label>
+              <input type="text" id="fecha" name="Fecha de los hechos" placeholder="Ej. 12 de marzo, o 'todos los lunes'" required>
+              <span class="mensaje-error">Indica cuándo ocurrió.</span>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Urgencia</label>
+            <div class="opciones" role="radiogroup" aria-label="Urgencia">
+              <input type="radio" id="u1" name="Urgencia" value="Baja"><label for="u1">Baja</label>
+              <input type="radio" id="u2" name="Urgencia" value="Media" checked><label for="u2">Media</label>
+              <input type="radio" id="u3" name="Urgencia" value="Alta"><label for="u3">Alta</label>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="queja">Tu queja <span class="req">*</span></label>
+            <textarea id="queja" name="Queja" maxlength="2500" placeholder="Cuenta qué pasó, quiénes estaban involucrados, cuántas veces ha ocurrido y cómo te afecta a ti o a tu grupo." required></textarea>
+            <span class="contador-texto"><span id="conteo">0</span>/2500</span>
+            <span class="mensaje-error">Escribe al menos 20 caracteres para que la queja sea útil.</span>
+          </div>
+
+          <div class="campo">
+            <label for="propuesta">¿Qué propones para resolverlo? (opcional)</label>
+            <textarea id="propuesta" name="Propuesta" maxlength="800" style="min-height:110px" placeholder="Una solución concreta ayuda a que la queja avance."></textarea>
+          </div>
+
+          <div class="campo">
+            <label>Consentimiento <span class="req">*</span></label>
+            <div class="casilla">
+              <input type="checkbox" id="acepto" name="Acepta uso de la información" value="Sí" required>
+              <span>Acepto que SOMOS use esta información para dar seguimiento ante las instancias del plantel, cuidando mi identidad si así lo pido.</span>
+            </div>
+            <div class="casilla">
+              <input type="checkbox" id="anonimo" name="Solicita anonimato" value="Sí">
+              <span>Quiero que mi queja se presente de forma <strong>anónima</strong>.</span>
+            </div>
+            <span class="mensaje-error">Necesitamos tu consentimiento para poder actuar.</span>
+          </div>
+
+          <div class="acciones">
+            <button type="submit" class="boton" id="btnEnviar">Enviar queja</button>
+            <button type="button" class="boton fantasma" id="btnLimpiar">Limpiar</button>
+          </div>
+
+          <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section>
+      <h2>Qué pasa con tu queja<span class="sub">Ruta de atención</span></h2>
+      <div class="metricas">
+        <div class="metrica"><b>1</b><small>Se recibe y registra</small></div>
+        <div class="metrica"><b>2</b><small>Se clasifica y verifica</small></div>
+        <div class="metrica"><b>3</b><small>Se lleva a la instancia</small></div>
+        <div class="metrica"><b>4</b><small>Se informa el avance</small></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>¿Prefieres hablarlo?<span class="sub">Otros canales</span></h2>
+      <div class="cta">
+        <p>Si tu situación es urgente o delicada, escríbenos directo por Instagram del comité. Nadie está solo en esto.</p>
+        <a class="boton" href="https://www.instagram.com/somos_p10?stkn=bzlzamtxdWZlaDdy" target="_blank" rel="noopener noreferrer">@SOMOSP10</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>SOMOS</strong><br><br>
+    Comité Estudiantil · Politécnico Ingeniero Jorge Matute Remus
+  </footer>
+
+  <button id="irArriba" aria-label="Volver arriba">↑</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CORREO_DESTINO = 'somospolimatute@gmail.com';
+
+  /* ---------- Título letra por letra ---------- */
+  const titulo = document.getElementById('titulo');
+  const texto = titulo.textContent;
+  titulo.textContent = '';
+  [...texto].forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.className = 'letra';
+    s.textContent = ch === ' ' ? '\u00A0' : ch;
+    s.style.animationDelay = (0.25 + i * 0.05) + 's';
+    titulo.appendChild(s);
+  });
+
+  /* ---------- Revelado al hacer scroll ---------- */
+  const secciones = document.querySelectorAll('section');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    secciones.forEach(s => obs.observe(s));
+  } else {
+    secciones.forEach(s => s.classList.add('visible'));
+  }
+
+  /* ---------- Luz que sigue al cursor en las tarjetas ---------- */
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ---------- Barra de progreso e ir arriba ---------- */
+  const progreso = document.getElementById('progreso');
+  const irArriba = document.getElementById('irArriba');
+  function alScroll() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progreso.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    irArriba.classList.toggle('visible', window.scrollY > 400);
+  }
+  window.addEventListener('scroll', alScroll, { passive: true });
+  alScroll();
+  irArriba.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ---------- Formulario ---------- */
+  const form = document.getElementById('formQueja');
+  const aviso = document.getElementById('aviso');
+  const btnEnviar = document.getElementById('btnEnviar');
+  const btnLimpiar = document.getElementById('btnLimpiar');
+  const queja = document.getElementById('queja');
+  const conteo = document.getElementById('conteo');
+  const correo = document.getElementById('correo');
+  const anonimo = document.getElementById('anonimo');
+  const nombre = document.getElementById('nombre');
+
+  queja.addEventListener('input', () => { conteo.textContent = queja.value.length; });
+
+  anonimo.addEventListener('change', () => {
+    if (anonimo.checked) {
+      nombre.value = '';
+      nombre.disabled = true;
+      nombre.placeholder = 'Queja anónima';
+    } else {
+      nombre.disabled = false;
+      nombre.placeholder = 'Puedes dejarlo vacío y enviar anónimo';
+    }
+  });
+
+  function campoDe(el) { return el.closest('.campo'); }
+  function marcar(el, hayError) { campoDe(el).classList.toggle('error', hayError); }
+
+  form.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', () => campoDe(el) && campoDe(el).classList.remove('error'));
+    el.addEventListener('change', () => campoDe(el) && campoDe(el).classList.remove('error'));
+  });
+
+  function validar() {
+    let ok = true;
+    let primero = null;
+
+    const tipo = form.querySelector('input[name="Tipo de queja"]:checked');
+    const campoTipo = form.querySelector('input[name="Tipo de queja"]');
+    marcar(campoTipo, !tipo);
+    if (!tipo) { ok = false; primero = primero || campoTipo; }
+
+    ['lugar', 'fecha'].forEach(id => {
+      const el = document.getElementById(id);
+      const vacio = el.value.trim() === '';
+      marcar(el, vacio);
+      if (vacio) { ok = false; primero = primero || el; }
+    });
+
+    const textoQueja = queja.value.trim();
+    marcar(queja, textoQueja.length < 20);
+    if (textoQueja.length < 20) { ok = false; primero = primero || queja; }
+
+    const valorCorreo = correo.value.trim();
+    const correoMal = valorCorreo !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valorCorreo);
+    marcar(correo, correoMal);
+    if (correoMal) { ok = false; primero = primero || correo; }
+
+    const acepto = document.getElementById('acepto');
+    marcar(acepto, !acepto.checked);
+    if (!acepto.checked) { ok = false; primero = primero || acepto; }
+
+    if (primero) primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return ok;
+  }
+
+  function mostrarAviso(tipo, html) {
+    aviso.className = 'aviso visible ' + tipo;
+    aviso.innerHTML = html;
+  }
+
+  function textoPlano() {
+    const datos = new FormData(form);
+    const lineas = [];
+    datos.forEach((valor, clave) => {
+      if (clave.startsWith('_') || !String(valor).trim()) return;
+      lineas.push(clave + ': ' + valor);
+    });
+    return lineas.join('\n');
+  }
+
+  function respaldoMailto() {
+    const asunto = 'Buzón de quejas · Poli Matute';
+    return 'mailto:' + CORREO_DESTINO +
+      '?subject=' + encodeURIComponent(asunto) +
+      '&body=' + encodeURIComponent(textoPlano());
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    aviso.className = 'aviso';
+    if (!validar()) {
+      mostrarAviso('mal', 'Revisa los campos marcados en rojo para poder enviar tu queja.');
+      return;
+    }
+
+    btnEnviar.disabled = true;
+    const etiquetaOriginal = btnEnviar.textContent;
+    btnEnviar.textContent = 'Enviando…';
+
+    const datos = new FormData(form);
+    if (nombre.disabled) datos.set('Nombre', 'Anónimo');
+    datos.set('_subject', 'Buzón de quejas · ' + (datos.get('Tipo de queja') || 'General'));
+
+    try {
+      const r = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: datos
+      });
+      const json = await r.json().catch(() => ({}));
+      if (r.ok && String(json.success) !== 'false') {
+        form.reset();
+        conteo.textContent = '0';
+        nombre.disabled = false;
+        mostrarAviso('ok', '<strong>Queja enviada.</strong> Llegó al correo del comité (' + CORREO_DESTINO + '). Gracias por alzar la voz: le damos seguimiento y, si dejaste tu correo, te contactamos.');
+      } else {
+        throw new Error(json.message || 'Error del servicio de envío');
+      }
+    } catch (err) {
+      mostrarAviso('mal',
+        'No pudimos enviarla automáticamente. Usa este enlace para mandarla desde tu correo: ' +
+        '<a href="' + respaldoMailto() + '">enviar por correo a ' + CORREO_DESTINO + '</a>.');
+    } finally {
+      btnEnviar.disabled = false;
+      btnEnviar.textContent = etiquetaOriginal;
+    }
+  });
+
+  btnLimpiar.addEventListener('click', () => {
+    form.reset();
+    conteo.textContent = '0';
+    nombre.disabled = false;
+    aviso.className = 'aviso';
+    form.querySelectorAll('.campo.error').forEach(c => c.classList.remove('error'));
+  });
+
+  /* ---------- Partículas de brasa ---------- */
+  const lienzo = document.getElementById('lienzo');
+  const ctx = lienzo.getContext('2d');
+  let w, h, particulas = [];
+  const raton = { x: -9999, y: -9999 };
+
+  function dimensionar() {
+    w = lienzo.width = window.innerWidth;
+    h = lienzo.height = window.innerHeight;
+    const cantidad = Math.min(120, Math.round(w / 12));
+    particulas = Array.from({ length: cantidad }, () => nueva());
+  }
+  function nueva() {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2.2 + 0.6,
+      vy: -(Math.random() * 0.5 + 0.15),
+      vx: (Math.random() - 0.5) * 0.3,
+      a: Math.random() * 0.6 + 0.2,
+      tono: 18 + Math.random() * 26
+    };
+  }
+  function pintar() {
+    ctx.clearRect(0, 0, w, h);
+    particulas.forEach(p => {
+      const dx = p.x - raton.x, dy = p.y - raton.y;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < 14000) {
+        const f = (14000 - d2) / 14000 * 0.9;
+        p.x += dx / Math.sqrt(d2 + 1) * f;
+        p.y += dy / Math.sqrt(d2 + 1) * f;
+      }
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+      if (p.x < -10) p.x = w + 10;
+      if (p.x > w + 10) p.x = -10;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${p.tono}, 100%, 58%, ${p.a})`;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = `hsla(${p.tono}, 100%, 55%, 0.9)`;
+      ctx.fill();
+    });
+    requestAnimationFrame(pintar);
+  }
+
+  window.addEventListener('resize', dimensionar);
+  window.addEventListener('mousemove', e => { raton.x = e.clientX; raton.y = e.clientY; });
+  dimensionar();
+  if (!reduce) pintar();
+})();
+</script>
+</body>
+</html>
